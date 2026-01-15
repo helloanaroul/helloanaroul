@@ -1,81 +1,71 @@
 name: GitHub Snake Game
 
+# ==============================
+# Workflow Triggers
+# ==============================
 on:
-  # ======================================================
-  # WORKFLOW TRIGGERS
-  # ======================================================
-  
-  # SCHEDULED: Daily execution at 00:00 UTC (midnight)
+  # Run automatically every day at 00:00 UTC
   schedule:
     - cron: "0 0 * * *"
 
-  # MANUAL: Trigger from GitHub Actions interface
+  # Allow manual execution from GitHub Actions UI
   workflow_dispatch:
 
-  # PUSH: Run on commits to main branch
+  # Run on push to main branch
   push:
     branches:
       - main
 
+# ==============================
+# Jobs Definition
+# ==============================
 jobs:
   generate:
-    # ------------------------------------------------
-    # JOB CONFIGURATION
-    # ------------------------------------------------
+    name: Generate Contribution Snake
     runs-on: ubuntu-latest
+
+    # Prevent hanging jobs
     timeout-minutes: 10
 
     steps:
-      # ==============================================
-      # STEP 1: Repository Checkout
-      # ==============================================
-      - name: Checkout Repository
+      # ------------------------------
+      # Step 1: Checkout Repository
+      # ------------------------------
+      - name: Checkout repository
         uses: actions/checkout@v3
-        # Fetches repository code for processing
 
-      # ==============================================
-      # STEP 2: Snake Animation Generation
-      # ==============================================
-      - name: Generate GitHub Contributions Snake Animations
+      # ------------------------------
+      # Step 2: Generate Snake Animation
+      # ------------------------------
+      - name: Generate GitHub contributions snake
         uses: Platane/snk@v3
         with:
-          # TARGET USER: Repository owner's contribution data
+          # GitHub username (auto-detected from repo owner)
           github_user_name: ${{ github.repository_owner }}
 
-          # OUTPUT CONFIGURATIONS:
-          # -----------------------
-          # Format: filename?parameters
+          # Output files configuration
           outputs: |
-            # 1. Standard SVG (light theme)
             dist/github-snake.svg
-            
-            # 2. Dark theme SVG
             dist/github-snake-dark.svg?palette=github-dark
-            
-            # 3. Animated GIF with custom colors
-            #    - Snake: Orange
-            #    - Dots: Blue gradient palette
             dist/ocean.gif?color_snake=orange&color_dots=#bfd6f6,#8dbdff,#64a1f4,#4b91f1,#3c7dd9
-        
-        # AUTHENTICATION: Required for GitHub API access
         env:
+          # Required GitHub token for API access
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      # ==============================================
-      # STEP 3: Deployment to Output Branch
-      # ==============================================
-      - name: Deploy to Output Branch
+      # ------------------------------
+      # Step 3: Deploy to Output Branch
+      # ------------------------------
+      - name: Deploy snake animation to output branch
         uses: peaceiris/actions-gh-pages@v3
         with:
-          # AUTHENTICATION: GitHub token for deployment
+          # Authentication token
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          
-          # SOURCE: Directory containing generated files
+
+          # Directory to publish
           publish_dir: ./dist
-          
-          # TARGET: Branch to host the files
+
+          # Target branch for generated files
           publish_branch: output
-          
-          # COMMIT: Message for deployment commits
-          commit_message: "Update snake animation [skip ci]"
-          # [skip ci] prevents triggering other workflows
+
+          # Custom commit message
+          commit_message: "chore: update GitHub snake animation [skip ci]"
