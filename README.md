@@ -79,11 +79,9 @@ Hello! I'm Anarul Sarder, a passionate developer with expertise across various t
 ![Windows Terminal](https://img.shields.io/badge/Windows%20Terminal-%234D4D4D.svg?style=for-the-badge&logo=windows-terminal&logoColor=white)
 
 # GitHub Stats:
-<div style="text-align: center">
 ![](https://github-readme-stats.vercel.app/api?username=helloanaroul&theme=dark&hide_border=false&include_all_commits=true&count_private=true)
 ![](https://github-readme-stats.vercel.app/api/top-langs/?username=helloanaroul&theme=dark&hide_border=false&include_all_commits=true&count_private=true&layout=compact)
 ![](https://nirzak-streak-stats.vercel.app/?user=helloanaroul&theme=dark&hide_border=false)
-</div>
 
 <div style="text-align: center">
   <img src="https://raw.githubusercontent.com/helloanaroul/helloanaroul/output/github-snake-dark.svg" alt="GitHub Contribution Snake" />
