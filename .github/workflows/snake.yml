@@ -1,0 +1,81 @@
+name: GitHub Contribution Snake Animation
+
+on:
+  # ──────────────────────────────────────────────────────────────────────
+  # SCHEDULE: Run automatically every day at midnight (00:00) UTC
+  # ──────────────────────────────────────────────────────────────────────
+  schedule:
+    - cron: "0 0 * * *"
+
+  # ──────────────────────────────────────────────────────────────────────
+  # MANUAL TRIGGER: Allows execution via GitHub Actions UI
+  # ──────────────────────────────────────────────────────────────────────
+  workflow_dispatch:
+
+  # ──────────────────────────────────────────────────────────────────────
+  # PUSH TRIGGER: Run on every commit to main branch for immediate updates
+  # ──────────────────────────────────────────────────────────────────────
+  push:
+    branches:
+      - main
+
+jobs:
+  # ──────────────────────────────────────────────────────────────────────
+  # JOB: Generate animated snake visualization from GitHub contributions
+  # ──────────────────────────────────────────────────────────────────────
+  generate:
+    # Execution environment: Latest Ubuntu runner
+    runs-on: ubuntu-latest
+    
+    # Safety timeout: Prevents infinite execution (10 minutes max)
+    timeout-minutes: 10
+
+    steps:
+      # ──────────────────────────────────────────────────────────────────
+      # STEP 1: Checkout repository code
+      # Purpose: Get access to current repository files
+      # ──────────────────────────────────────────────────────────────────
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      # ──────────────────────────────────────────────────────────────────
+      # STEP 2: Generate contribution snake animations
+      # Tool: Uses Platane/snk to visualize GitHub contribution history
+      # ──────────────────────────────────────────────────────────────────
+      - name: Generate GitHub Contributions Snake Animations
+        uses: Platane/snk@v3
+        with:
+          # Target user: Repository owner's contribution data
+          github_user_name: ${{ github.repository_owner }}
+          
+          # Output configurations:
+          # 1. Default SVG (light theme)
+          # 2. Dark theme SVG with GitHub dark palette
+          # 3. Animated GIF with custom ocean color scheme
+          outputs: |
+            dist/github-snake.svg
+            dist/github-snake-dark.svg?palette=github-dark
+            dist/ocean.gif?color_snake=orange&color_dots=#bfd6f6,#8dbdff,#64a1f4,#4b91f1,#3c7dd9
+        
+        # Authentication: Required for GitHub API access
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # ──────────────────────────────────────────────────────────────────
+      # STEP 3: Deploy generated files to output branch
+      # Purpose: Host animations on GitHub Pages compatible branch
+      # ──────────────────────────────────────────────────────────────────
+      - name: Deploy to Output Branch
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          # Authentication for branch deployment
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          
+          # Source directory containing generated files
+          publish_dir: ./dist
+          
+          # Target branch for hosting files
+          publish_branch: output
+          
+          # Commit message for deployment commits
+          commit_message: "Update snake animation [skip ci]"
