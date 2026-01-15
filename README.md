@@ -6,7 +6,6 @@ Hello! I'm Anarul Sarder, a passionate developer with expertise across various t
 - 💬 **Ask me about:** Web development, UI/UX design, or tech solutions
 - ⚡ **Fun fact:** I love exploring new technologies and creative coding challenges
 
-
 ## Socials:
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white)](https://linkedin.com/in/helloanaroul)
@@ -77,11 +76,6 @@ Hello! I'm Anarul Sarder, a passionate developer with expertise across various t
 ![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)
 ![Linux](https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black)
 ![Windows Terminal](https://img.shields.io/badge/Windows%20Terminal-%234D4D4D.svg?style=for-the-badge&logo=windows-terminal&logoColor=white)
-
-# GitHub Stats:
-![](https://github-readme-stats.vercel.app/api?username=helloanaroul&theme=dark&hide_border=false&include_all_commits=true&count_private=true)
-![](https://github-readme-stats.vercel.app/api/top-langs/?username=helloanaroul&theme=dark&hide_border=false&include_all_commits=true&count_private=true&layout=compact)
-![](https://nirzak-streak-stats.vercel.app/?user=helloanaroul&theme=dark&hide_border=false)
 
 <div style="text-align: center">
   <img src="https://raw.githubusercontent.com/helloanaroul/helloanaroul/output/github-snake-dark.svg" alt="GitHub Contribution Snake" />
